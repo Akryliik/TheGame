@@ -1,6 +1,10 @@
-#include <iostream>
+#ifndef ABILITY_H
+#define ABILITY_H
+
 #include <string>
+#include <random>
 using namespace std;
+#include <iostream>
 
 class Ability {
     public:
@@ -12,3 +16,5 @@ class Ability {
         Ability(int, int, string); // Constructeur de compétence.
         void display(); // Affiche la compétence.
 };
+
+#endif

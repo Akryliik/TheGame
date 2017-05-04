@@ -22,14 +22,13 @@ Character::Character(int llife, int mmana, Ability *ccomp, int nnbComp, string n
 }
 
 Character::~Character() { // Destructeur de la classe "Character".
-    delete []comp;
+    delete[] comp;
 }
 
 void Character::display() {
     cout << "- Nom : " << name << endl;
     cout << "- PV : " << life << endl;
     cout << "- PM : " << mana << endl;
-    cout << "- Nombre compétences : " << nbComp << endl;
     cout << "- Compétences : " << endl;
     for(int i = 0; i < nbComp; i++) {
         cout << i+1 << ") ";
