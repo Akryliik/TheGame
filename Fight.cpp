@@ -134,6 +134,7 @@ bool Fight::end(Character *p) { // Détermine si c'est la fin du combat.
 }
 
 void Fight::on() { // Fonction globale qui va lancer l'intégralité d'un combat.
+    system("clear");
     cout << endl << "Le combat commence !" << endl << endl;
     HUD();
     while(true) { // Boucle infinie.
@@ -144,6 +145,7 @@ void Fight::on() { // Fonction globale qui va lancer l'intégralité d'un combat
         HUD();
         cout << endl;
         system( "read -n 1 -s -p \"\"" );
+
         if(monster.life <= 0) {end(&monster); return;}
         turn(&monster, &hero); // Tour du monstre.
         HUD();
