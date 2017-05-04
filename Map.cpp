@@ -138,18 +138,3 @@ void Map::display() {				// fonction d'affichage de la map
 	}
 }
 
-int main() {
-	Map M(10, 2, 2);
-	M.repartition(1, 1, 2, 4);						// mana , heal , obstacle , monstre
-	M.display();
-	string dir;
-	while (dir != "fin") {
-		cout << "bouger " << endl;
-		cin >> dir;
-		
-		cout << M.move(dir) << endl;
-		M.display();
-	}
-	cin.ignore(100);
-	return 0;
-}
