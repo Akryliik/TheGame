@@ -1,11 +1,15 @@
+#ifndef GAME_H
+#define GAME_H
 #include <iostream>
-
+using namespace std;
+#include "Config.h"
+#include "Map.h"
+#include "Fight.h"
 class Game{
 
 	int nbr_monster; //nb de monstre
-	int size; //taille de la carte 
-	int nbr_obstacle; //nb obstacle qui sotn sur la carte 
 
 	public :
 		Game(Config &conf);
 };
+#endif

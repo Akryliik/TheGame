@@ -1,17 +1,16 @@
+#ifndef INVENTORY_H
+#define INVENTORY_H
 #include <iostream>
-#include "Object.h"
 
 using namespace std;
 
-class Inventory{ 
-	
+class Inventory {
+	public :
 	int nbPotL; //nb de potion de vie
 	int nbPotM; //nb de potion de mana
 
-	public :
-		
-		Inventory(config &conf);
-		void UseObject(int lPotion , int mPotion, Character c);
-		void AddObject();
-
+		Inventory();
+		Inventory(int, int);
+		void AddObject(string);
 };
+#endif
