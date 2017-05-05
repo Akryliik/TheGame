@@ -4,10 +4,10 @@ Fight::Fight() { // Constructeur de la classe "Fight" par défaut.
 
 }
 
-Fight::Fight(Character &hhero, Character &mmonster/*, Config cconf*/) { // Constructeur de combat avec le héros et un ennemi.
+Fight::Fight(Character *hhero, Character *mmonster, Config cconf) { // Constructeur de combat avec le héros et un ennemi.
     hero = hhero; // Récupère les carcatéristiques du héros (PV, mana, compétences, etc...).
     monster = mmonster; // Récupère les carcatéristiques du monstre (PV, mana, compétence, etc...).
-    //conf = cconf;
+    conf = cconf;
 }
 
 void Fight::dammage(int dmg, Character *p) { // Calcul des dégâts encaissés par les personnages.
@@ -30,6 +30,8 @@ void Fight::manaLoss(int m, Character *p) { // Calcul des PM consommés par la c
 
 void Fight::turn(Character *p1, Character *p2) { // Le joueur p1 joue son tour / Le joueur p2 prend les dégâts.
     bool tmp = false;
+    system("clear");
+    cout << "         ----------------------------------------         " << endl;
     cout << "Tour de " << p1->name << " : " << endl << endl;
 
     // SI p1 EST LE HÉROS :
@@ -80,10 +82,12 @@ void Fight::turn(Character *p1, Character *p2) { // Le joueur p1 joue son tour /
 
         // UTILISATION DE L'INVENTAIRE :
         if(choice == p1->nbComp) { // Si le joueur choisi d'ouvrir l'inventaire.
-            cout << "L'utilisation de l'inventaire n'est pas encore implémentée" << endl;
-            turn(p1, p2);
-            //p1->inv.UseObject(conf.pot_life, conf.pot_mana, p1); // Ouvre l'inventaire.
-            return; // Le tour est terminée après l'utilisation de l'objet.
+            if(p1->UseObject(conf.pot_life, conf.pot_mana)) {
+                return;
+            }
+            else {
+                turn(p1, p2);
+            }
         }
 
         if(choice != p1->nbComp) { // Si le joueur a choisi une compétence.
@@ -138,22 +142,22 @@ void Fight::on() { // Fonction globale qui va lancer l'intégralité d'un combat
     cout << endl << "Le combat commence !" << endl << endl;
     HUD();
     while(true) { // Boucle infinie.
-        if(hero.life <= 0) {end(&hero); return;} // Si fin de combat, sort de la fonction.
+        if(hero->life <= 0) {end(hero); return;} // Si fin de combat, sort de la fonction.
         cout << endl;
         system( "read -n 1 -s -p \"\"" );
-        turn(&hero, &monster); // Tour du joueur.
+        turn(hero, monster); // Tour du joueur.
         HUD();
         cout << endl;
         system( "read -n 1 -s -p \"\"" );
 
-        if(monster.life <= 0) {end(&monster); return;}
-        turn(&monster, &hero); // Tour du monstre.
+        if(monster->life <= 0) {end(monster); return;}
+        turn(monster, hero); // Tour du monstre.
         HUD();
 
     }
 }
 
 void Fight::HUD() { // Affiche les PV et PM du héros.
-    cout << "- " << hero.name << " : " << hero.life << " (vie) / "<< hero.mana << " (mana)" << endl;
-    cout << "- " << monster.name << " : " << monster.life << " (vie) / "<< monster.mana << " (mana)" << endl;
+    cout << "- " << hero->name << " : " << hero->life << " (vie) / "<< hero->mana << " (mana)" << endl;
+    cout << "- " << monster->name << " : " << monster->life << " (vie) / "<< monster->mana << " (mana)" << endl;
 }
